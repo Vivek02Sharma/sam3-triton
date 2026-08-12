@@ -1,0 +1,17 @@
+[project]
+name = "sam3-triton"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Vivek02Sharma", email = "vivektusharma@gmail.com" }
+]
+requires-python = ">=3.14"
+dependencies = []
+
+[project.scripts]
+sam3-triton = "sam3_triton:main"
+
+[build-system]
+requires = ["uv_build>=0.12.3,<0.13.0"]
+build-backend = "uv_build"
