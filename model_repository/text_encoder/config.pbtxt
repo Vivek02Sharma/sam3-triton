@@ -1,0 +1,43 @@
+name: "text_encoder"
+platform: "tensorrt_plan"
+
+max_batch_size: 4
+
+input[
+    {
+        name: "input_ids"
+        data_type: TYPE_INT64
+        dims: [32]
+    },
+    {
+        name: "attention_mask"
+        data_type: TYPE_INT64
+        dims: [32]
+    }
+]
+
+output[
+    {
+        name: "text_features"
+        data_type: TYPE_FP32
+        dims: [32, 256]
+    },
+    {
+        name: "text_mask"
+        data_type: TYPE_BOOL,
+        dims: [32]
+    }
+]
+
+dynamic_batching{
+    preferred_batch_size: [2, 4]
+    max_queue_delay_microseconds: 5000
+}
+
+instance_group[
+    {
+        count: 2
+        kind: KIND_GPU
+        gpus: [0]
+    }
+]

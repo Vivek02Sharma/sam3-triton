@@ -1,0 +1,73 @@
+name: "mask_decoder"
+platform: "tensorrt_plan"
+
+max_batch_size: 4
+
+input[
+    {
+        name: "fpn_feat_0"
+        data_type: TYPE_FP32
+        dims: [256, 288, 288]
+    },
+    {
+        name: "fpn_feat_1"
+        data_type: TYPE_FP32
+        dims: [256, 144, 144]
+    },
+    {
+        name: "fpn_feat_2"
+        data_type: TYPE_FP32
+        dims: [256, 72, 72]
+    },
+    {
+        name: "fpn_pos_2"
+        data_type: TYPE_FP32
+        dims: [256, 72, 72]
+    },
+    {
+        name: "prompt_features"
+        data_type: TYPE_FP32
+        dims: [-1, 256]
+    },
+    {
+        name: "prompt_mask"
+        data_type: TYPE_BOOL
+        dims: [-1]
+    }
+]
+
+output[
+    {
+        name: "pred_mask"
+        data_type: TYPE_FP32
+        dims: [200, 288, 288]
+    },
+    {
+        name: "pred_boxes"
+        data_type: TYPE_FP32
+        dims: [200 ,4]
+    },
+    {
+        name: "pred_logits"
+        data_type: TYPE_FP32
+        dims: [200]
+    },
+    {
+        name: "presence_logits"
+        data_type: TYPE_FP32
+        dims: [1]
+    }
+]
+
+dynamic_batching{
+    preferred_batch_size: [2, 4]
+    max_queue_delay_microseconds: 5000
+}
+
+instance_group[
+    {
+        count: 2
+        kind: KIND_GPU
+        gpus: [0]
+    }
+]
