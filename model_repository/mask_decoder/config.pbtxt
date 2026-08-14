@@ -38,7 +38,7 @@ input[
 
 output[
     {
-        name: "pred_mask"
+        name: "pred_masks"
         data_type: TYPE_FP32
         dims: [200, 288, 288]
     },
