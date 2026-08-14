@@ -10,12 +10,7 @@ requires-python = ">=3.14"
 dependencies = [
     "numpy>=2.5.2",
     "opencv-python-headless>=5.0.0.93",
+    "streamlit>=1.61.1",
     "transformers>=5.15.0",
+    "tritonclient[http]>=2.71.0",
 ]
-
-[project.scripts]
-sam3-triton = "sam3_triton:main"
-
-[build-system]
-requires = ["uv_build>=0.12.3,<0.13.0"]
-build-backend = "uv_build"
