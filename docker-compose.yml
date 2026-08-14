@@ -1,0 +1,25 @@
+services:
+  triton:
+    build: .
+    image: custom-triton-sam3
+    container_name: sam3-triton-server
+    restart: unless-stopped
+    shm_size: 5G
+    ports:
+      - "9000-9002:9000-9002"
+    volumes:
+      - ./model_repository:/models
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/v2/health/ready"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 60s
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              device_ids: ['0']
+              capabilities: [gpu]
+    command: tritonserver --model-repository=/models --http-port=9000 --grpc-port=9001 --metrics-port=9002 --disable-auto-complete-config

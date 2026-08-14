@@ -7,7 +7,11 @@ authors = [
     { name = "Vivek02Sharma", email = "vivektusharma@gmail.com" }
 ]
 requires-python = ">=3.14"
-dependencies = []
+dependencies = [
+    "numpy>=2.5.2",
+    "opencv-python-headless>=5.0.0.93",
+    "transformers>=5.15.0",
+]
 
 [project.scripts]
 sam3-triton = "sam3_triton:main"
