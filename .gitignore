@@ -10,3 +10,4 @@ wheels/
 .venv
 .onnx
 .plan
+model_repository/sam3_model/1/tokenizer_assets/

@@ -19,6 +19,10 @@ wget -nc https://github.com/jamjamjon/assets/releases/download/sam3/text-encoder
 wget -nc https://github.com/jamjamjon/assets/releases/download/sam3/decoder.onnx
 cd -
 
+echo "Downloading Tokenizer assets..."
+wget -nc -P model_repository/sam3_model/1/tokenizer_assets https://github.com/jamjamjon/assets/releases/download/sam3/{tokenizer.json,tokenizer_config.json,vocab.json,merges.txt,special_tokens_map.json}
+
+
 # 3. Build TensorRT Engines
 echo "Compiling TensorRT Engines (This will take a while)..."
 
